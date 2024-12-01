@@ -21,30 +21,43 @@ __3 - gerenciando o postgresql__
 brew services start postgresql
 brew services list
 
-vi /usr/local/var/postgres/pg_hba.conf
+psql postgres
+postgres=# ALTER USER xxxx PASSWORD 'xxxx';
 ```
+
+Obs.: o usuário do PostgreSQL no MacOS é geralmente o usuário do sistema
+
+configure o PostgreSQL para aceitar conexão apenas autenticada
+
+`vi /opt/homebrew/var/postgresql@14/pg_hba.conf`
 
 modifique a linha 
 
-`local   all             postgres                                peer`
+`local   all             postgres                                trust`
 
 para
 
 `local   all             postgres                                md5`
 
+depois, configure o PostgreSQL para aceitar conexão apenas de localhost
+
+`vi /opt/homebrew/var/postgresql@14/postgresql.conf`
+
+descomente a linha 
+
+`#listen_addresses = 'localhost'`
+
 ```
 brew services restart postgresql
-psql -U postgres
-ALTER USER postgres PASSWORD 'sua-senha';
+
+psql -U xxxx postgres
+
+CREATE DATABASE xxxx;
+CREATE USER xxxx WITH PASSWORD 'xxxx';
+GRANT ALL PRIVILEGES ON DATABASE xxxx TO xxxx;
+\q
+psql -U xxxx -d cryptoX
 ```
-
-
-
-
-
-CREATE DATABASE cryptoX
-```
-
 __4 - instalar o python3 requests__
 
 `pip3 install requests`
