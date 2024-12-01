@@ -4,8 +4,10 @@ Obs.: em macOS
 
 __1 - criar o venv__
 
-```python3 -m venv venv
-source venv/bin/activate```
+```
+python3 -m venv venv
+source venv/bin/activate
+```
 
 __2 - instalar o python3 requests__
 
